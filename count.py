@@ -1,12 +1,17 @@
 
 import json
+import glob
 
-query = ['sport', 'tech', 'world', 'finance', 'politics', 'business',
-         'economics', 'entertainment', 'travel', 'food', 'science','beauty']
 
+json_files = []
+for file in glob.glob("news_dataset/*.json"):
+    json_files.append(file)
+query = json_files
 
 for q in query:
-    f = open(f'dataset/{q}.json')
+    f = open(f'{q}')
     data = json.load(f)
-    print(f'{q} :',len(data))
+    file_name = q.split('\\')[1]
+    file_name = file_name.split('.')[0]
+    print(file_name+' :',len(data))
     f.close()
