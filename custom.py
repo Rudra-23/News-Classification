@@ -3,7 +3,7 @@ import json
 from newscatcherapi import NewsCatcherApiClient
 import newscatcherapi
 
-api_key = 'aNWN1kWureFPONyGke7q3dLhK1fVq-GCFDuoh0zeXW4'
+api_key = ''
 
 
 def scrap(query, pages, page_size):

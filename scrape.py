@@ -34,7 +34,7 @@ def scrap(query, pages, page_size,api_key):
 
 
 query = ['sport','tech', 'world', 'finance', 'politics', 'business', 'economics', 'entertainment', 'beauty', 'travel','food', 'science']
-api_key = 'aNWN1kWureFPONyGke7q3dLhK1fVq-GCFDuoh0zeXW4'
+api_key = ''
 
 for q in query:
     total_val = scrap(query=q, pages=100, page_size=100,api_key=api_key)
