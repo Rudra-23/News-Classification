@@ -1,7 +1,11 @@
 from newscatcherapi import NewsCatcherApiClient
 import time
 import json
-
+import os
+from dotenv import load_dotenv
+load_dotenv()
+token = os.environ.get("api-key")
+api_key = token
 
 def scrap(query, pages, page_size,api_key):
     newscatcherapi = NewsCatcherApiClient(x_api_key=api_key)
@@ -26,7 +30,8 @@ def scrap(query, pages, page_size,api_key):
     except:
         print('Insufficent data.')
     finally:
-        file_name = 'news_dataset/'+f'{query}' + '.json'
+        # file_name = 'news_dataset/'+f'{query}' + '.json'
+        file_name = f'{query}' + '.json'
         
         with open(file_name, 'a') as f:
             json.dump(arr, f)
@@ -34,7 +39,7 @@ def scrap(query, pages, page_size,api_key):
 
 
 query = ['sport','tech', 'world', 'finance', 'politics', 'business', 'economics', 'entertainment', 'beauty', 'travel','food', 'science']
-api_key = ''
+
 
 for q in query:
     total_val = scrap(query=q, pages=100, page_size=100,api_key=api_key)

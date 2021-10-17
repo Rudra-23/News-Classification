@@ -1,10 +1,13 @@
+import os
 import time
 import json
 from newscatcherapi import NewsCatcherApiClient
 import newscatcherapi
 
-api_key = ''
-
+from dotenv import load_dotenv
+load_dotenv()
+token = os.environ.get("api-key")
+api_key = token
 
 def scrap(query, pages, page_size):
     newscatcherapi = NewsCatcherApiClient(x_api_key=api_key)
