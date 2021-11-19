@@ -55,7 +55,7 @@ def custom(query, pages, page_size):
             for news in all_articles['articles']:
                 if news['title'] not in all_news_name:
                     temp = {'title': news['title'], 'excerpt': news['excerpt'],
-                            'summary': news['summary'], 'label': 'sport'}
+                            'summary': news['summary'], 'label': 'environment'}
                     arr.append(temp)
                     all_news_name.add(news['title'])
     except Exception as e:
@@ -69,28 +69,32 @@ def custom(query, pages, page_size):
             json.dump(arr, f)
 
 
-## standard scraping
+############ Standard Scraping
 
-query = ['sport','tech', 'world', 'finance', 'politics', 'business', 'economics', 'entertainment', 'beauty', 'travel','food', 'science']
+def scraping_func():
+    query = ['sport','tech', 'world', 'finance', 'politics', 'business', 'economics', 'entertainment', 'beauty', 'travel','food', 'science']
 
+    for q in query:
+        total_val = scrap(query=q, pages=100, page_size=100,api_key=api_key)
+        print(q,'is added to the database. Total number of values: ',total_val)
+        time.sleep(10)
 
-for q in query:
-    total_val = scrap(query=q, pages=100, page_size=100,api_key=api_key)
-    print(q,'is added to the database. Total number of values: ',total_val)
-    time.sleep(10)
+# scraping_func() 
 
+############
 
-### custom scraping
+############ Custom Scraping
 
-temp_arr = ['agriculture', 'climate', 'global warming', 'pollution', 'weather', 'disaster', 'anthropology', 'green',
-            'sustainability', 'climate change', 'environmental science', 'environmental engineering', 'air quality', 'wildlife']
+def custom_func():
+    keywords_arr = ['agriculture', 'climate', 'global warming', 'pollution', 'weather', 'disaster', 'anthropology', 'green','sustainability', 'climate change', 'environmental science', 'environmental engineering', 'air quality', 'wildlife']
 
-val = ''
-for temp in temp_arr:
-    val += temp.lower() + ' OR ' + temp.capitalize() + \
-        ' OR ' + temp.upper() + ' OR '
+    val = ''
+    for key in keywords_arr:
+        val += key.lower() + ' OR ' + key.capitalize() + ' OR ' + key.upper() + ' OR '
 
-val = val[:-4]
-# val = 'Sport OR Athlete OR Boxing OR Championship OR Cricket OR Basketball OR Baseball OR Football OR Soccer OR Badminton OR Gymnasium OR Gymnastics OR Goal OR Hockey OR Olympics OR Race OR Rafting OR Racing OR Rugby OR Referee OR Swimming OR Swimmer OR Tennis OR World Series OR Tennis OR Table Tennis OR World Cup'
+    val = val[:-4]
+    custom(val, 100, 100)
 
-custom(val, 100, 100)
+# custom_func()
+
+############
